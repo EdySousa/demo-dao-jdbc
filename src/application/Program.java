@@ -1,21 +1,20 @@
 package application;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
+import model.dao.DaoFactory;
+import model.dao.SellerDao;
 import model.entities.Seller;
-import model.entities.Saller;
 
 public class Program {
 
 	public static void main(String[] args) throws ParseException {
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Seller department = new Seller(2, "Books");
 
-		Saller saller = new Saller(1, "Ed", "ed@gmail.com", sdf.parse("16/05/1989"), 1200.0, department);
+		SellerDao sellerDao = DaoFactory.createSellerDao();
+		
+		Seller saller = sellerDao.findById(3);
 
-		System.out.println(department);
 		System.out.println(saller);
 
 	}
