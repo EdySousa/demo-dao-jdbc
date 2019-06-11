@@ -1,6 +1,7 @@
 package application;
 
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 import model.dao.DaoFactory;
@@ -12,33 +13,29 @@ public class Program {
 
 	public static void main(String[] args) throws ParseException {
 
-
 		SellerDao sellerDao = DaoFactory.createSellerDao();
-		
+
 		System.out.println("=== Test 1: seller findById ===");
 		Seller saller = sellerDao.findById(3);
 		System.out.println(saller);
 
-		
 		System.out.println("\n=== Test 2: seller findByDepartmentId ===");
-		
 		Department department = new Department(2, null);
-
 		List<Seller> sellers = sellerDao.findByDepartment(department);
-		
 		for (Seller seller : sellers) {
 			System.out.println(seller);
 		}
-		
-		System.out.println("\n=== Test 3: seller findAll ===");
-		
 
+		System.out.println("\n=== Test 3: seller findAll ===");
 		List<Seller> list = sellerDao.findAll();
-		
 		for (Seller obj : list) {
 			System.out.println(obj);
 		}
-		
+
+		System.out.println("\n=== Test 4: seller insert ===");
+		Seller newSeller = new Seller(null, "Greg", "greg@gmail.com", new Date(), 4000.0, department);
+		sellerDao.insert(newSeller);
+		System.out.println("Inserted! New id = " + newSeller.getId());
 	}
 
 }
